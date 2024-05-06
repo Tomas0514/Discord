@@ -3,7 +3,6 @@ package cz.tomas.discord;
 import cz.tomas.discord.Entity.Channel;
 import cz.tomas.discord.Entity.Guild;
 import cz.tomas.discord.Entity.Message;
-import cz.tomas.discord.Repository.*;
 import cz.tomas.discord.Repository.GuildRepository;
 import cz.tomas.discord.Repository.UserRepository;
 import cz.tomas.discord.Service.UserService;

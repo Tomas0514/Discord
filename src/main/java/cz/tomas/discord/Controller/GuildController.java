@@ -29,6 +29,11 @@ public class GuildController {
     }
     
     @GetMapping
+    public String redirect() {
+        return "redirect:/guild/me";
+    }
+    
+    @GetMapping("/me")
     public String me(Model model) {
         User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         final List<Guild> guilds = userService.getUsersGuilds(user);

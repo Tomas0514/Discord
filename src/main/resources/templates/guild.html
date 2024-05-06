@@ -12,10 +12,11 @@
 
 
   <div class="align-items-start" id="wrapper">
-    <nav class="col bg-secondary-subtle" id="serverSidebar">
-      <div class="list-group list-group-flush align-items-center">
+
+    <nav class="col bg-secondary-subtle" id="serverSidebar" th:fragment="ServerSidebar">
+      <div class="list-group list-group-flush align-items-center mt-3">
         <div class="list-group-item p-0 guild-icon">
-          <a class="guild-icon-box" th:href="@{/}">Home</a>
+          <a class="guild-icon-box" th:href="@{/guild/me}">Home</a>
         </div>
         <div class="bg-dark line"></div>
         <div class="list-group-item p-0 guild-icon" th:each="guild: ${guilds}">
@@ -37,7 +38,7 @@
     </div>
 
 
-    <div class="col-9" id="channel">
+    <div class="col-9 p-3" id="channel">
       <div id="messages">
         Messages
         <ul class="ps-0">

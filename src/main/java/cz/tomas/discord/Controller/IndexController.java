@@ -2,7 +2,6 @@ package cz.tomas.discord.Controller;
 
 import cz.tomas.discord.Entity.Guild;
 import cz.tomas.discord.Entity.User;
-import cz.tomas.discord.Repository.*;
 import cz.tomas.discord.Repository.GuildRepository;
 import cz.tomas.discord.Repository.UserRepository;
 import org.springframework.stereotype.Controller;
