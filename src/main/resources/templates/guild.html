@@ -16,7 +16,7 @@
     <nav class="col bg-secondary-subtle" id="serverSidebar" th:fragment="ServerSidebar">
       <div class="list-group list-group-flush align-items-center mt-3">
         <div class="list-group-item p-0 guild-icon">
-          <a class="guild-icon-box" th:href="@{/guild/me}">Home</a>
+          <a class="guild-icon-box" th:href="@{/guild/@me}">Home</a>
         </div>
         <div class="bg-dark line"></div>
         <div class="list-group-item p-0 guild-icon" th:each="guild: ${guilds}">

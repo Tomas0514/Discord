@@ -1,13 +1,11 @@
 package cz.tomas.discord.Service;
 
-import cz.tomas.discord.Entity.Guild;
 import cz.tomas.discord.Entity.User;
 import cz.tomas.discord.Repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -80,28 +78,5 @@ public class UserService {
      */
     public User getUser(long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-    }
-    
-    /**
-     * Returns all {@link Guild}s of a {@link User}
-     * @param user User
-     * @return List of {@link Guild}s
-     */
-    public List<Guild> getUsersGuilds(User user) {
-        List<Guild> guilds = new ArrayList<>();
-        user.getMembers().forEach(member -> guilds.add(member.getGuild()));
-        return guilds;
-    }
-    
-    /**
-     * Returns all {@link Guild}s of a {@link User}
-     * @param id User's id
-     * @return List of {@link Guild}s
-     */
-    public List<Guild> getUsersGuilds(long id) {
-        final User user = getUser(id);
-        List<Guild> guilds = new ArrayList<>();
-        user.getMembers().forEach(member -> guilds.add(member.getGuild()));
-        return guilds;
     }
 }
