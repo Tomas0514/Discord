@@ -49,6 +49,19 @@ public class CommandLineApplication implements CommandLineRunner {
         user4.sendFriendRequest(user1);
         user3.sendFriendRequest(user1);
         
+//        for (int i = 0; i < 16; i++) {
+//            user5.sendFriendRequest(user1);
+//            user1.createFriendship(user6);
+//            user1.createFriendship(user6);
+//            user1.createFriendship(user6);
+//            user1.joinGuild(guild1);
+//            user1.joinGuild(guild1);
+//            user1.joinGuild(guild1);
+//            new Channel("Chat a " + i, guild1);
+//            new Channel("Chat b " + i, guild1);
+//            new Channel("Chat c " + i, guild1);
+//        }
+        
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);

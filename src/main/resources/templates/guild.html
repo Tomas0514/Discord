@@ -13,7 +13,7 @@
 
   <div class="align-items-start" id="wrapper">
 
-    <nav class="col bg-secondary-subtle" id="serverSidebar" th:fragment="ServerSidebar">
+    <nav class="col bg-secondary-subtle overflow-y-scroll" id="serverSidebar" th:fragment="ServerSidebar">
       <div class="list-group list-group-flush align-items-center mt-3">
         <div class="list-group-item p-0 guild-icon">
           <a class="guild-icon-box" th:href="@{/guild/@me}">Home</a>
@@ -25,7 +25,7 @@
       </div>
     </nav>
 
-    <div class="bg-dark-subtle ps-2 col" id="leftSidebar">
+    <div class="bg-dark-subtle ps-2 col overflow-y-scroll" id="leftSidebar">
       <h1 class="mb-3" th:text="${guild.getName()}"></h1>
       <div id="channels">
         <p class="fs-6 m-0">Channels:</p>
@@ -38,7 +38,7 @@
     </div>
 
 
-    <div class="col-9 p-3" id="channel">
+    <div class="col-9 p-3 overflow-y-scroll" id="channel">
       <div id="messages">
         Messages
         <ul class="ps-0">
@@ -60,7 +60,7 @@
     </div>
 
 
-    <div class="bg-dark-subtle ps-2 col">
+    <div class="bg-dark-subtle ps-2 col overflow-y-scroll">
       <h2>Members:</h2>
       <ul class="list-unstyled">
           <li class="fs-4 ms-3" th:each="member: ${guild.getMembers()}" th:text="${member.getUser().getUsername()}"></li>

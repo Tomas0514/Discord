@@ -8,6 +8,18 @@
   max-width: 70px;
 }
 
+#serverSidebar::-webkit-scrollbar {
+  display: none;
+}
+
+#leftSidebar::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+#leftSidebar::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
 .col, .col-9 {
   height: 100%;
 }

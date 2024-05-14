@@ -7,11 +7,13 @@ import cz.tomas.discord.Entity.User;
 import cz.tomas.discord.Repository.GuildRepository;
 import cz.tomas.discord.Repository.UserRepository;
 import cz.tomas.discord.Service.GuildService;
+import cz.tomas.discord.Service.UserNotFoundException;
 import cz.tomas.discord.Service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -77,6 +79,46 @@ public class GuildController {
         userRepository.save(friend);
         
         return "redirect:/guild/@me/@pending";
+    }
+    
+    @GetMapping("/@me/@addFriend")
+    public String addFriend(@RequestParam boolean success, Model model) {
+        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final List<Guild> guilds = user.getGuilds();
+        final List<User> friends = user.getFriends();
+        
+        model.addAttribute("success", success);
+        model.addAttribute("friends", friends);
+        model.addAttribute("guilds", guilds);
+        return "addFriend";
+    }
+    
+    @PostMapping("/@me/@addFriend/add")
+    public String add(@RequestParam String username, RedirectAttributes redirectAttributes) {
+        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        String message = "Friend request sent!";
+        boolean success = false;
+        try {
+            final User friend = userService.getUser(username);
+            if (user.getFriends().contains(friend)) {
+                message = "You're already friends with that user.";
+            } else if (friend.getRequests().contains(user)) {
+                message = "You're already sent a friend request to that user.";
+            } else if (user == friend) {
+                message = "You cannot add yourself.";
+            } else {
+                user.sendFriendRequest(friend);
+                userRepository.save(friend);
+                success = true;
+            }
+            
+        } catch (UserNotFoundException ex) {
+            message = "Hm, that didn't work. Double-check that the username is correct.";
+        }
+        
+        redirectAttributes.addAttribute("success", success);
+        redirectAttributes.addAttribute("message", message);
+        return "redirect:/guild/@me/@addFriend";
     }
     
     @GetMapping("/@me/{friendId}")

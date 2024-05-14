@@ -13,7 +13,7 @@
 <div id="wrapper">
   <div th:replace="~{guild :: ServerSidebar}"></div>
 
-  <div class="bg-dark-subtle ps-2 col" id="leftSidebar" th:fragment="FriendBar">
+  <div class="bg-dark-subtle ps-2 col overflow-y-scroll" id="leftSidebar" th:fragment="FriendBar">
     <ul class="list-unstyled">
       <li>
         <a class="fs-5 m-0" th:href="@{/guild/@me}">Friends</a>
@@ -22,7 +22,7 @@
         <a class="fs-5 m-0" th:href="@{/guild/@me/@pending}">Pending</a>
       </li>
       <li>
-        <a class="fs-5 m-0" th:href="@{/guild/@me/@addFriend}">Add Friend</a>
+        <a class="fs-5 m-0" th:href="@{/guild/@me/@addFriend?success=false}">Add Friend</a>
       </li>
       <span class="fs-6">Direct Messages</span>
       <li th:each="friend: ${friends}">
