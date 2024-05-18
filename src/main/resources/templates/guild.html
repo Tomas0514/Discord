@@ -16,12 +16,17 @@
     <nav class="col bg-secondary-subtle overflow-y-scroll" id="serverSidebar" th:fragment="ServerSidebar">
       <div class="list-group list-group-flush align-items-center mt-3">
         <div class="list-group-item p-0 guild-icon">
-          <a class="guild-icon-box" th:href="@{/guild/@me}">Home</a>
+          <a th:href="@{/guild/@me}">Home</a>
+          <a th:href="@{/login}">Login</a>
         </div>
         <div class="bg-dark line"></div>
         <div class="list-group-item p-0 guild-icon" th:each="guild: ${guilds}">
           <a class="guild-icon-box" th:href="@{/guild/{guildId}(guildId=${guild.getId()})}" th:text="${guild.getName()}"></a>
         </div>
+      </div>
+
+      <div id="userInfo" class="bg-black">
+        <span th:text="${user.getUsername()}" class="fs-2"></span>
       </div>
     </nav>
 
@@ -38,9 +43,8 @@
     </div>
 
 
-    <div class="col-9 p-3 overflow-y-scroll" id="channel">
+    <div class="col-9 p-3 overflow-y-scroll">
       <div id="messages">
-        Messages
         <ul class="ps-0">
           <li class="message mb-3" th:each="message: ${channel.getMessages()}">
             <div class="message-header gap-2">
@@ -52,11 +56,14 @@
             </div>
           </li>
         </ul>
+        <div id="messageDiv">
+          <form method="post" th:action="@{/guild/{guildId}/{channelId}/send(guildId=${guild.getId()},channelId=${channel.getId()})}" id="messageForm">
+            <input type="text" name="content" th:placeholder="|Message ${channel.getName()}|" maxlength="2048" id="text-box" class="form-control" required autofocus>
+            <input type="submit" value="Send" class="form-control" style="width: 10%;">
+          </form>
+        </div>
       </div>
-      <form method="post" th:action="@{/guild/{guildId}/{channelId}/send(guildId=${guild.getId()},channelId=${channel.getId()})}">
-        <input type="text" name="content" th:placeholder="|Message ${channel.getName()}|" maxlength="2048" id="text-box">
-        <input type="submit" value="Send">
-      </form>
+
     </div>
 
 

@@ -26,15 +26,13 @@
       </li>
       <span class="fs-6">Direct Messages</span>
       <li th:each="friend: ${friends}">
-        <a class="fs-5 m-0" th:href="@{/guild/@me/{friendId}(friendId=${friend.getId()})}" th:text="${friend.getUsername()}"></a>
+        <a class="fs-5 m-0" th:href="@{/guild/@me/{friendId}(friendId=${friend.getGroup().getId()})}" th:text="${friend.getGroup().getTheOtherOne(friend.getUser()).getUsername()}"></a>
       </li>
     </ul>
   </div>
 
-  <div class="col-9 p-3" id="channel">
-    <div id="messages">
-
-    </div>
+  <div class="col-9 p-3">
+    <span>Friends</span>
   </div>
 
   <div class="bg-dark-subtle ps-2 col" th:fragment="RightBar">

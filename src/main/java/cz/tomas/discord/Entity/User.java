@@ -19,8 +19,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
     
-    @ManyToMany()
-    private List<User> friends = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Friend> friends = new ArrayList<>();
     
     @ManyToMany()
     private List<User> requests = new ArrayList<>();
@@ -72,16 +72,24 @@ public class User {
         friend.addFriendRequest(this);
     }
     
-    public List<User> getFriends() {
+    public List<Friend> getFriends() {
         return friends;
     }
     
-    private void addFriend(User friend) {
+    public List<User> getFriendsAsUsers() {
+        List<User> users = new ArrayList<>();
+        for (Friend friend : friends) {
+            users.add(friend.getGroup().getTheOtherOne(this));
+        }
+        return users;
+    }
+
+    public void addFriend(Friend friend) {
         friends.add(friend);
     }
-    
-    public void createFriendship(User friend) {
-        friends.add(friend);
-        friend.addFriend(this);
+
+    public void createFriendship(User friend, Group group) {
+        new Friend(this, group);
+        new Friend(friend, group);
     }
 }

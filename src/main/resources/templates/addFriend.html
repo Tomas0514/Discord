@@ -20,7 +20,7 @@
     <form method="post" th:action="@{/guild/@me/@addFriend/add}">
       <div style="display: flex; gap: 1rem;">
         <div class="col-10">
-          <input type="text" name="username" id="username" placeholder="You can add friends with their usernames" class="form-control">
+          <input type="text" name="username" id="username" placeholder="You can add friends with their usernames" maxlength="32" class="form-control">
         </div>
         <div class="col">
           <input type="submit" value="Send Friend Request" class="btn btn-primary form-control">

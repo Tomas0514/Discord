@@ -1,8 +1,10 @@
 package cz.tomas.discord;
 
 import cz.tomas.discord.Entity.Channel;
+import cz.tomas.discord.Entity.Group;
 import cz.tomas.discord.Entity.Guild;
 import cz.tomas.discord.Entity.Message;
+import cz.tomas.discord.Repository.GroupRepository;
 import cz.tomas.discord.Repository.GuildRepository;
 import cz.tomas.discord.Repository.UserRepository;
 import cz.tomas.discord.Service.UserService;
@@ -16,11 +18,13 @@ public class CommandLineApplication implements CommandLineRunner {
 
     private final GuildRepository guildRepository;
     private final UserRepository userRepository;
+    private final GroupRepository groupRepository;
     private final UserService userService;
 
-    public CommandLineApplication(GuildRepository guildRepository, UserRepository userRepository, UserService userService) {
+    public CommandLineApplication(GuildRepository guildRepository, UserRepository userRepository, GroupRepository groupRepository, UserService userService) {
         this.guildRepository = guildRepository;
         this.userRepository = userRepository;
+        this.groupRepository = groupRepository;
         this.userService = userService;
     }
 
@@ -44,16 +48,22 @@ public class CommandLineApplication implements CommandLineRunner {
         final var user5 = userService.createUser("Max"    , "", List.of("USER"));
         final var user6 = userService.createUser("Patrick", "", List.of("USER"));
 
-        user1.createFriendship(user2);
+        final var group = new Group();
+        
+        user1.createFriendship(user2, group);
+        user2.createFriendship(user3, group);
         user1.sendFriendRequest(user5);
         user4.sendFriendRequest(user1);
         user3.sendFriendRequest(user1);
         
+        groupRepository.save(group);
+        
+//        final Group testGroup = new Group();
 //        for (int i = 0; i < 16; i++) {
 //            user5.sendFriendRequest(user1);
-//            user1.createFriendship(user6);
-//            user1.createFriendship(user6);
-//            user1.createFriendship(user6);
+//            user1.createFriendship(user6, testGroup);
+//            user1.createFriendship(user6, testGroup);
+//            user1.createFriendship(user6, testGroup);
 //            user1.joinGuild(guild1);
 //            user1.joinGuild(guild1);
 //            user1.joinGuild(guild1);
@@ -61,6 +71,7 @@ public class CommandLineApplication implements CommandLineRunner {
 //            new Channel("Chat b " + i, guild1);
 //            new Channel("Chat c " + i, guild1);
 //        }
+//        groupRepository.save(testGroup);
         
         userRepository.save(user1);
         userRepository.save(user2);

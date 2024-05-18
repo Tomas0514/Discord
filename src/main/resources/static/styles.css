@@ -12,11 +12,20 @@
   display: none;
 }
 
-#leftSidebar::-webkit-scrollbar {
+#userInfo {
+  position: absolute;
+  left: 70px;
+  bottom: 0;
+  width: 205px;
+  height: 50px;
+  padding-left: 8px;
+}
+
+::-webkit-scrollbar {
     width: 0.25rem;
 }
 
-#leftSidebar::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #000;
 }
 
@@ -39,14 +48,24 @@
   height: 50px;
 }
 
-#channel {
+#messageDiv {
+  position: fixed;
+  bottom: 0.5rem;
+  width: 75%;
+  height: 3rem;
+  padding-right: 3rem;
+}
+
+#messageForm {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 #messages {
   height: 100%;
+}
+
+#messages ul {
+  padding-bottom: 3rem;
 }
 
 .message {
