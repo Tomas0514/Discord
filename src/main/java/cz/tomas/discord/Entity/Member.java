@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a member.
+ */
+
 @Entity
 public class Member {
 
@@ -21,8 +25,14 @@ public class Member {
     private LocalDateTime joinedAt;
 
 
-    public Member() {}
-
+    // --- Constructors ---
+    private Member() {}
+    
+    /**
+     * Creates a member.
+     * @param user User
+     * @param guild Guild
+     */
     public Member(User user, Guild guild) {
         this.user = user;
         this.guild = guild;
@@ -30,14 +40,37 @@ public class Member {
         guild.addMember(this);
     }
 
+    
+    // --- Getters and setters ---
+    
+    /**
+     * Get Id.
+     * @return Id
+     */
+    public long getId() {
+        return id;
+    }
+    
+    /**
+     * Get user.
+     * @return User
+     */
     public User getUser() {
         return user;
     }
-
+    
+    /**
+     * Get guild.
+     * @return guild
+     */
     public Guild getGuild() {
         return guild;
     }
-
+    
+    /**
+     * Get joined at.
+     * @return LocalDateTime
+     */
     public LocalDateTime getJoinedAt() {
         return joinedAt;
     }

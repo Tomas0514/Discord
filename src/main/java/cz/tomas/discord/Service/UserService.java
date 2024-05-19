@@ -22,7 +22,7 @@ public class UserService {
     }
     
     /**
-     * Create a user or throws an {@link UserAlreadyExistsException}
+     * Create a user or throws an {@link UserAlreadyExistsException}.
      * @param username Username
      * @param password Password
      * @param roles An array of strings
@@ -42,7 +42,7 @@ public class UserService {
     }
     
     /**
-     * Deletes and creates a user
+     * Deletes and creates a user.
      * @param username Username
      * @param password password
      * @param roles An array of strings
@@ -54,7 +54,7 @@ public class UserService {
     }
     
     /**
-     * Deletes a user
+     * Deletes a user.
      * @param username Username
      */
     public void deleteUser(String username) {
@@ -63,7 +63,7 @@ public class UserService {
     }
     
     /**
-     * Finds a user by username or throws an {@link UserNotFoundException}
+     * Finds a user by username or throws an {@link UserNotFoundException}.
      * @param username User's username
      * @return {@link User}
      */
@@ -72,7 +72,7 @@ public class UserService {
     }
     
     /**
-     * Finds a user by id or throws an {@link UserNotFoundException}
+     * Finds a user by id or throws an {@link UserNotFoundException}.
      * @param id User's id
      * @return {@link User}
      */

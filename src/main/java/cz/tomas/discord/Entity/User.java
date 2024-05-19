@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+/**
+ * Represents a user.
+ */
 
 @Entity
 @Table(name = "users_discord")
@@ -26,57 +29,107 @@ public class User {
     @ManyToMany()
     private List<User> requests = new ArrayList<>();
 
+    
+    // --- Constructors ---
     private User() {}
-
+    
+    /**
+     * Creates a user.
+     * @param username User's username
+     */
     public User(String username) {
         this.username = username;
     }
 
 
-    // Getters and functions
-
+    // --- Getters and setters ---
+    
+    /**
+     * Get Id.
+     * @return Id
+     */
     public long getId() {
         return id;
     }
-
+    
+    /**
+     * Get username.
+     * @return Username
+     */
     public String getUsername() {
         return username;
     }
-
+    
+    /**
+     * Get members.
+     * @return List of {@link Member}s
+     */
     public List<Member> getMembers() {
         return members;
     }
     
+    /**
+     * Get guilds.
+     * @return List of {@link Guild}s
+     */
     public List<Guild> getGuilds() {
         List<Guild> guilds = new ArrayList<>();
         members.forEach(member -> guilds.add(member.getGuild()));
         return guilds;
     }
-
+    
+    /**
+     * Joins a guild.
+     * @param guild Guild
+     */
     public void joinGuild(Guild guild) {
         new Member(this, guild);
     }
     
+    /**
+     * Get requests.
+     * @return List of {@link User}s
+     */
     public List<User> getRequests() {
         return requests;
     }
     
-    private void addFriendRequest(User user) {
+    /**
+     * Adds a request.
+     * @param user User
+     */
+    private void addRequest(User user) {
         requests.add(user);
     }
     
-    public void removeFriendRequest(User user) {
+    /**
+     * Removes a request.
+     * @param user User
+     */
+    public void removeRequest(User user) {
         requests.remove(user);
     }
     
-    public void sendFriendRequest(User friend) {
-        friend.addFriendRequest(this);
+    /**
+     * Sends a request to a user.
+     * @param friend User
+     */
+    public void sendRequest(User friend) {
+        friend.addRequest(this);
     }
     
+    /**
+     * Get friends.
+     * @return List of {@link Friend}s
+     */
     public List<Friend> getFriends() {
         return friends;
     }
     
+    /**
+     * Get friends as users.
+     * @return List of {@link User}s
+     */
     public List<User> getFriendsAsUsers() {
         List<User> users = new ArrayList<>();
         for (Friend friend : friends) {
@@ -85,11 +138,19 @@ public class User {
         return users;
     }
     
-    public void joinGroup(Group group) {
-        new Friend(this, group);
-    }
-
+    /**
+     * Adds a friend.
+     * @param friend Friend
+     */
     public void addFriend(Friend friend) {
         friends.add(friend);
+    }
+    
+    /**
+     * Joins a group.
+     * @param group Group
+     */
+    public void joinGroup(Group group) {
+        new Friend(this, group);
     }
 }

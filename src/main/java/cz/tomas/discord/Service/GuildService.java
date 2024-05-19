@@ -15,7 +15,7 @@ public class GuildService {
     }
     
     /**
-     * Finds a guild by id or throws a {@link GuildNotFoundException}
+     * Finds a guild by id or throws a {@link GuildNotFoundException}.
      * @param id Guild's id
      * @return {@link Guild}
      */
@@ -24,7 +24,7 @@ public class GuildService {
     }
     
     /**
-     * Find a channel in a guild by id or throws a {@link ChannelNotFoundException}
+     * Find a channel in a guild by id or throws a {@link ChannelNotFoundException}.
      * @param guild Guild
      * @param channelId Channel's id
      * @return {@link Channel}
@@ -36,7 +36,7 @@ public class GuildService {
     }
     
     /**
-     * Find a channel in a guild by id or throws a {@link GuildNotFoundException} or {@link ChannelNotFoundException}
+     * Find a channel in a guild by id or throws a {@link GuildNotFoundException} or {@link ChannelNotFoundException}.
      * @param guildId Guild' id
      * @param channelId Channel's id
      * @return {@link Channel}

@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a message.
+ */
+
 @Entity
 public class Message {
 
@@ -25,7 +29,7 @@ public class Message {
 
 
     // --- Constructors ---
-    public Message() {}
+    private Message() {}
 
     /**
      * Creates and sends a new message
@@ -44,23 +48,43 @@ public class Message {
 
 
     // --- Getters and setters ---
-
+    
+    /**
+     * Get Id.
+     * @return Id
+     */
     public long getId() {
         return id;
     }
-
+    
+    /**
+     * Get channel.
+     * @return Channel
+     */
     public Channel getChannel() {
         return channel;
     }
-
+    
+    /**
+     * Get context.
+     * @return Context
+     */
     public String getContent() {
         return content;
     }
-
+    
+    /**
+     * Get author.
+     * @return {@link User}
+     */
     public User getAuthor() {
         return author;
     }
-
+    
+    /**
+     * Get timestamp.
+     * @return LocalDateTime
+     */
     public LocalDateTime getTimestamp() {
         return timestamp;
     }

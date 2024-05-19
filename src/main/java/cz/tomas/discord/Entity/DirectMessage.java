@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a direct message.
+ * Is the same as a normal {@link Message}, but instead of a channel it has a group.
+ */
+
 @Entity
 public class DirectMessage {
     
@@ -25,10 +30,10 @@ public class DirectMessage {
 
 
     // --- Constructors ---
-    public DirectMessage() {}
+    private DirectMessage() {}
 
     /**
-     * Creates and sends a new direct message
+     * Creates and sends a new direct message.
      *
      * @param group The group where the message is
      * @param content The content of the message
@@ -44,23 +49,43 @@ public class DirectMessage {
 
 
     // --- Getters and setters ---
-
+    
+    /**
+     * Get Id.
+     * @return Id
+     */
     public long getId() {
         return id;
     }
-
+    
+    /**
+     * Get group.
+     * @return {@link Group}
+     */
     public Group getGroup() {
         return group;
     }
-
+    
+    /**
+     * Get content.
+     * @return Content
+     */
     public String getContent() {
         return content;
     }
-
+    
+    /**
+     * Get author.
+     * @return {@link User}
+     */
     public User getAuthor() {
         return author;
     }
-
+    
+    /**
+     * Get timestamp.
+     * @return LocalDateTime
+     */
     public LocalDateTime getTimestamp() {
         return timestamp;
     }

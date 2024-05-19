@@ -57,9 +57,9 @@ public class CommandLineApplication implements CommandLineRunner {
         user1.joinGroup(group2);
         user2.joinGroup(group2);
         
-        user1.sendFriendRequest(user5);
-        user4.sendFriendRequest(user1);
-        user3.sendFriendRequest(user1);
+        user1.sendRequest(user5);
+        user4.sendRequest(user1);
+        user3.sendRequest(user1);
         
         groupRepository.save(group1);
         groupRepository.save(group2);

@@ -14,7 +14,7 @@ public class GroupService {
     }
     
     /**
-     * Finds a group by id or throws a {@link GroupNotFoundException}
+     * Finds a group by id or throws a {@link GroupNotFoundException}.
      * @param id Group's id
      * @return {@link Group}
      */

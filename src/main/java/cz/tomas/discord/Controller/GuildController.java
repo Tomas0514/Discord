@@ -77,7 +77,7 @@ public class GuildController {
         }
 
         if (user.getRequests().contains(friend)) {
-            user.removeFriendRequest(friend);
+            user.removeRequest(friend);
         }
 
         userRepository.save(user);
@@ -113,7 +113,7 @@ public class GuildController {
             } else if (user == friend) {
                 message = "You cannot add yourself.";
             } else {
-                user.sendFriendRequest(friend);
+                user.sendRequest(friend);
                 userRepository.save(friend);
                 success = true;
             }

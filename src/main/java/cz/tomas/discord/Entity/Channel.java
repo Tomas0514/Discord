@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a channel.
+ */
+
 @Entity
 public class Channel {
 
@@ -23,10 +27,10 @@ public class Channel {
 
 
     // --- Constructors ---
-    public Channel() {}
+    private Channel() {}
 
     /**
-     * Constructor
+     * Creates a channel.
      * @param name The name of the channel
      * @param guild The guild where the channel is
      */
@@ -38,27 +42,51 @@ public class Channel {
 
 
     // --- Getters and setters ---
-
+    
+    /**
+     * Get Id.
+     * @return Id
+     */
     public long getId() {
         return id;
     }
-
+    
+    /**
+     * Get name.
+     * @return Name
+     */
     public String getName() {
         return name;
     }
-
+    
+    /**
+     * Set name.
+     * @param name New name
+     */
     public void setName(String name) {
         this.name = name;
     }
-
+    
+    /**
+     * Get guild.
+     * @return {@link Guild}
+     */
     public Guild getGuild() {
         return guild;
     }
-
+    
+    /**
+     * Get messages.
+     * @return List of {@link Message}s
+     */
     public List<Message> getMessages() {
         return messages;
     }
-
+    
+    /**
+     * Adds a message.
+     * @param message Message
+     */
     public void addMessage(Message message) {
         messages.add(message);
     }
