@@ -30,7 +30,7 @@
       </ul>
       <div id="messageDiv">
         <form method="post" th:action="@{/guild/@me/{groupId}/send(groupId=${group.getId()})}" id="messageForm">
-          <input type="text" name="content" th:placeholder="|Message ${group.getTheOtherOne(user).getUsername()}|" maxlength="2048" id="text-box" class="form-control" required autofocus>
+          <input type="text" name="content" th:placeholder="|Message ${group.getName(user)}|" maxlength="2048" id="text-box" class="form-control" required autofocus>
           <input type="submit" value="Send" class="form-control" style="width: 10%;">
         </form>
       </div>

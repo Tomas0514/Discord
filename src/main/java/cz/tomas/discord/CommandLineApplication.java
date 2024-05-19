@@ -48,15 +48,21 @@ public class CommandLineApplication implements CommandLineRunner {
         final var user5 = userService.createUser("Max"    , "", List.of("USER"));
         final var user6 = userService.createUser("Patrick", "", List.of("USER"));
 
-        final var group = new Group();
+        final var group1 = new Group();
+        final var group2 = new Group();
         
-        user1.createFriendship(user2, group);
-        user2.createFriendship(user3, group);
+        user1.joinGroup(group1);
+        user2.joinGroup(group1);
+        user3.joinGroup(group1);
+        user1.joinGroup(group2);
+        user2.joinGroup(group2);
+        
         user1.sendFriendRequest(user5);
         user4.sendFriendRequest(user1);
         user3.sendFriendRequest(user1);
         
-        groupRepository.save(group);
+        groupRepository.save(group1);
+        groupRepository.save(group2);
         
 //        final Group testGroup = new Group();
 //        for (int i = 0; i < 16; i++) {

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users_discord")
@@ -83,13 +84,12 @@ public class User {
         }
         return users;
     }
+    
+    public void joinGroup(Group group) {
+        new Friend(this, group);
+    }
 
     public void addFriend(Friend friend) {
         friends.add(friend);
-    }
-
-    public void createFriendship(User friend, Group group) {
-        new Friend(this, group);
-        new Friend(friend, group);
     }
 }

@@ -71,7 +71,8 @@ public class GuildController {
 
         if (action && !user.getFriendsAsUsers().contains(friend)) {
             final Group group = new Group();
-            user.createFriendship(friend, group);
+            user.joinGroup(group);
+            friend.joinGroup(group);
             groupRepository.save(group);
         }
 

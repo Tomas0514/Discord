@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "group_discord")
@@ -34,11 +35,25 @@ public class Group {
     public User getTheOtherOne(User user) {
         List<User> members = new ArrayList<>();
         friends.forEach(friend -> members.add(friend.getUser()));
+        if (members.size() > 2) {
+            return null;
+        }
         if (members.get(0) == user) {
             return members.get(1);
-        } else {
-            return members.get(0);
         }
+        return members.get(0);
+    }
+    
+    public String getName(User user) {
+        List<User> members = new ArrayList<>();
+        friends.forEach(friend -> members.add(friend.getUser()));
+        if (members.size() > 2) {
+            return members.stream()
+                    .map(User::getUsername)
+                    .collect(Collectors.joining(", "));
+        }
+        if (members.get(0) == user) { return members.get(1).getUsername(); }
+        return members.get(0).getUsername();
     }
     
     public void addFriend(Friend friend) {

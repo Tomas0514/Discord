@@ -26,7 +26,7 @@
       </li>
       <span class="fs-6">Direct Messages</span>
       <li th:each="friend: ${friends}">
-        <a class="fs-5 m-0" th:href="@{/guild/@me/{friendId}(friendId=${friend.getGroup().getId()})}" th:text="${friend.getGroup().getTheOtherOne(friend.getUser()).getUsername()}"></a>
+        <a class="fs-5 m-0" th:href="@{/guild/@me/{friendId}(friendId=${friend.getGroup().getId()})}" th:text="${friend.getGroup().getName(friend.getUser())}"></a>
       </li>
     </ul>
   </div>
