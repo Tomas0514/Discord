@@ -5,7 +5,7 @@ import cz.tomas.discord.Repository.GroupRepository;
 import cz.tomas.discord.Repository.GuildRepository;
 import cz.tomas.discord.Repository.UserRepository;
 import cz.tomas.discord.Service.*;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ public class GuildController {
     
     @GetMapping("/@me")
     public String me(Model model) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final List<Guild> guilds = user.getGuilds();
         final List<Friend> friends = user.getFriends();
 
@@ -52,7 +52,7 @@ public class GuildController {
 
     @GetMapping("/@me/@pending")
     public String pending(Model model) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final List<Guild> guilds = user.getGuilds();
         final List<Friend> friends = user.getFriends();
         final List<User> requests = user.getRequests();
@@ -66,7 +66,7 @@ public class GuildController {
 
     @PostMapping("/@me/@pending/action")
     public String request(@RequestParam long id, @RequestParam boolean action) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final User friend = userService.getUser(id);
 
         if (action && !user.getFriendsAsUsers().contains(friend)) {
@@ -88,7 +88,7 @@ public class GuildController {
 
     @GetMapping("/@me/@addFriend")
     public String addFriend(@RequestParam boolean success, Model model) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final List<Guild> guilds = user.getGuilds();
         final List<Friend> friends = user.getFriends();
 
@@ -101,7 +101,7 @@ public class GuildController {
 
     @PostMapping("/@me/@addFriend/add")
     public String add(@RequestParam String username, RedirectAttributes redirectAttributes) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         String message = "Friend request sent!";
         boolean success = false;
         try {
@@ -127,9 +127,10 @@ public class GuildController {
         return "redirect:/guild/@me/@addFriend";
     }
     
+    @PreAuthorize("@securityService.isInGroup(#groupId)")
     @GetMapping("/@me/{groupId}")
     public String friend(@PathVariable long groupId, Model model) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final List<Guild> guilds = user.getGuilds();
         final List<Friend> friends = user.getFriends();
         final Group group = groupService.getGroup(groupId);
@@ -141,9 +142,10 @@ public class GuildController {
         return "friend";
     }
     
+    @PreAuthorize("@securityService.isInGroup(#groupId)")
     @PostMapping("/@me/{groupId}/send")
     public String direct(@RequestParam String content, @PathVariable long groupId) {
-        final User author = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User author = userService.getClientUser();
         final Group group = groupService.getGroup(groupId);
         
         new DirectMessage(group, content, author);
@@ -151,10 +153,11 @@ public class GuildController {
         
         return "redirect:/guild/@me/{groupId}";
     }
-
+    
+    @PreAuthorize("@securityService.isInGuild(#guildId)")
     @GetMapping("/{guildId}")
     public String guild(@PathVariable long guildId, Model model) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final Guild guild = guildService.getGuild(guildId);
         
         model.addAttribute("guilds", user.getGuilds());
@@ -164,9 +167,10 @@ public class GuildController {
         return "guild";
     }
     
+    @PreAuthorize("@securityService.isInGuild(#guildId)")
     @GetMapping("/{guildId}/{channelId}")
     public String channel(@PathVariable long guildId, @PathVariable long channelId, Model model) {
-        final User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User user = userService.getClientUser();
         final Guild guild = guildService.getGuild(guildId);
         final Channel channel = guildService.getChannel(guild, channelId);
         
@@ -177,14 +181,20 @@ public class GuildController {
         return "guild";
     }
     
+    @PreAuthorize("@securityService.isInGuild(#guildId)")
     @PostMapping("/{guildId}/{channelId}/send")
     public String send(@RequestParam String content, @PathVariable long guildId, @PathVariable long channelId) {
         final Channel channel = guildService.getChannel(guildId, channelId);
-        final User author = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        final User author = userService.getClientUser();
         
         new Message(channel, content, author);
         guildRepository.save(guildService.getGuild(guildId));
         
         return "redirect:/guild/{guildId}/{channelId}";
+    }
+    
+    @ExceptionHandler({UserNotFoundException.class, GuildNotFoundException.class, ChannelNotFoundException.class, GroupNotFoundException.class})
+    public String handleError() {
+        return "redirect:/guild/@me";
     }
 }

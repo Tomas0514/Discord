@@ -38,7 +38,12 @@
 
   </div>
 
-  <div th:replace="~{user :: RightBar}"></div>
+  <div class="bg-dark-subtle ps-2 col overflow-y-scroll">
+    <span th:text="|Members - ${group.getFriends().size()}|"></span>
+    <ul class="list-unstyled">
+      <li class="fs-4 ms-3" th:each="member: ${group.getFriends()}" th:text="${member.getUser().getUsername()}"></li>
+    </ul>
+  </div>
 
 </div>
 

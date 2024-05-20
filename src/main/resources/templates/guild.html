@@ -35,13 +35,12 @@
       <div id="channels">
         <p class="fs-6 m-0">Channels:</p>
         <ul class="list-unstyled">
-            <li th:each="channel: ${guild.getChannels()}">
+            <li th:each="channel: ${guild.getChannels()}" class="item">
                 <a class="fs-5 m-0" th:href="@{/guild/{guildId}/{channelId}(guildId=${guild.getId()},channelId=${channel.getId()})}" th:text="${channel.getName()}"></a>
             </li>
         </ul>
       </div>
     </div>
-
 
     <div class="col-9 p-3 overflow-y-scroll">
       <div id="messages">
@@ -68,9 +67,9 @@
 
 
     <div class="bg-dark-subtle ps-2 col overflow-y-scroll">
-      <h2>Members:</h2>
+      <span th:text="|Members - ${guild.getMembers().size()}"></span>
       <ul class="list-unstyled">
-          <li class="fs-4 ms-3" th:each="member: ${guild.getMembers()}" th:text="${member.getUser().getUsername()}"></li>
+          <li class="fs-4 ms-3 item" th:each="member: ${guild.getMembers()}" th:text="${member.getUser().getUsername()}"></li>
       </ul>
     </div>
   </div>
@@ -79,5 +78,16 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    // Start on verifying forms
+    const form = document.getElementById("messageForm")
+    form.addEventListener("submit", (event) => {
+      const message = event.target.content.value
+      if (message.length > 2048) {
+        event.preventDefault()
+      }
+    })
+  </script>
+
 </body>
 </html>

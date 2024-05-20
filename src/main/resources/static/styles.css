@@ -88,3 +88,9 @@
   width: 50%;
   margin-bottom: 10px;
 }
+
+.item {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 1.9em;
+}

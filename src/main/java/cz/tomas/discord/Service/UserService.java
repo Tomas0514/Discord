@@ -2,6 +2,7 @@ package cz.tomas.discord.Service;
 
 import cz.tomas.discord.Entity.User;
 import cz.tomas.discord.Repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
@@ -78,5 +79,13 @@ public class UserService {
      */
     public User getUser(long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    }
+    
+    /**
+     * Get client user or throw an {@link UserNotFoundException}.
+     * @return {@link User}
+     */
+    public User getClientUser() {
+        return getUser(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }
