@@ -20,7 +20,7 @@ public class Guild {
     @Column(nullable = false, length = 32)
     private String name;
 
-    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Channel> channels = new ArrayList<>();
 
     @OneToMany(mappedBy = "guild", cascade = CascadeType.ALL, orphanRemoval = true)

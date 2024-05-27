@@ -92,6 +92,7 @@ public class GuildController {
         final List<Guild> guilds = user.getGuilds();
         final List<Friend> friends = user.getFriends();
 
+        model.addAttribute("allUsers", userRepository.findAll());
         model.addAttribute("success", success);
         model.addAttribute("friends", friends);
         model.addAttribute("guilds", guilds);
@@ -142,18 +143,6 @@ public class GuildController {
         return "friend";
     }
     
-    @PreAuthorize("@securityService.isInGroup(#groupId)")
-    @PostMapping("/@me/{groupId}/send")
-    public String direct(@RequestParam String content, @PathVariable long groupId) {
-        final User author = userService.getClientUser();
-        final Group group = groupService.getGroup(groupId);
-        
-        new DirectMessage(group, content, author);
-        groupRepository.save(group);
-        
-        return "redirect:/guild/@me/{groupId}";
-    }
-    
     @PreAuthorize("@securityService.isInGuild(#guildId)")
     @GetMapping("/{guildId}")
     public String guild(@PathVariable long guildId, Model model) {
@@ -181,17 +170,6 @@ public class GuildController {
         return "guild";
     }
     
-    @PreAuthorize("@securityService.isInGuild(#guildId)")
-    @PostMapping("/{guildId}/{channelId}/send")
-    public String send(@RequestParam String content, @PathVariable long guildId, @PathVariable long channelId) {
-        final Channel channel = guildService.getChannel(guildId, channelId);
-        final User author = userService.getClientUser();
-        
-        new Message(channel, content, author);
-        guildRepository.save(guildService.getGuild(guildId));
-        
-        return "redirect:/guild/{guildId}/{channelId}";
-    }
     
     @ExceptionHandler({UserNotFoundException.class, GuildNotFoundException.class, ChannelNotFoundException.class, GroupNotFoundException.class})
     public String handleError() {
