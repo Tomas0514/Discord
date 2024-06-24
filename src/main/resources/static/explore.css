@@ -1,0 +1,76 @@
+#middleCol {
+  width: 85%;
+}
+
+#header {
+  position: relative;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+}
+
+.layer_123456 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#searchInput {
+  width: 25%;
+}
+
+#content {
+  padding: 1rem;
+  border-radius: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.guild-item {
+  height: 15rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.GI-name {
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.GI-info {
+  height: 50%;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+@media (max-width: 2160px) {
+  #content {
+      grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+@media (max-width: 1280px) {
+  #content {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #content {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}

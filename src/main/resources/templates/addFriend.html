@@ -17,19 +17,21 @@
 
   <div class="col-9 p-3 overflow-y-scroll">
     <span>Add Friend</span>
-    <form method="post" th:action="@{/guild/@me/@addFriend/add}">
-      <div style="display: flex; gap: 1rem;">
-        <div class="col-10">
-          <input type="text" list="names" name="username" id="username" placeholder="You can add friends with their usernames" maxlength="32" class="form-control">
-          <datalist id="names">
-            <option th:each="user: ${allUsers}" th:value="${user.getUsername()}">
-          </datalist>
+    <div class="bg-secondary-subtle" id="form-wraper">
+      <form method="post" th:action="@{/guild/@me/@addFriend/add}">
+        <div style="display: flex; gap: 1rem;">
+          <div class="col-10">
+            <input type="text" list="names" name="username" id="username" placeholder="You can add friends with their usernames" maxlength="32" class="form-control">
+            <datalist id="names">
+              <option th:each="user: ${allUsers}" th:value="${user.getUsername()}">
+            </datalist>
+          </div>
+          <div class="col">
+            <input type="submit" value="Send Friend Request" class="btn btn-primary form-control">
+          </div>
         </div>
-        <div class="col">
-          <input type="submit" value="Send Friend Request" class="btn btn-primary form-control">
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <div th:if="${param.message}" th:class="${success} ? 'text-success' : 'text-danger'" th:text="${param.message}"></div>
   </div>
 

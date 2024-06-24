@@ -33,16 +33,6 @@ public class CommandLineApplication implements CommandLineRunner {
     private void createTestingData() {
         userService.createUser("admin", "", List.of("DISCORD"));
     
-        final var guild1 = new Guild("Project");
-        final var guild2 = new Guild("Test Guild");
-        final var channel1 = new Channel("Chat"     , guild1);
-        final var channel2 = new Channel("Memes"    , guild1);
-        final var channel3 = new Channel("Sus"      , guild1);
-        final var channel4 = new Channel("Minecraft", guild2);
-        final var channel5 = new Channel("General"  , guild2);
-        final var channel6 = new Channel("Cat Pics" , guild2);
-        final var channel7 = new Channel("gcsfdlbhjmlcmhbkgflmbhkgmlbhjgamlbhjfdbhjlcgfdgcabhcafdhbjmagcmjhbfd", guild1);
-    
         final var John = userService.createUser("John"   , "", List.of("USER"));
         final var Alice = userService.createUser("Alice"  , "", List.of("USER"));
         final var Lukas = userService.createUser("Lukas"  , "", List.of("USER"));
@@ -50,7 +40,17 @@ public class CommandLineApplication implements CommandLineRunner {
         final var Max = userService.createUser("Max"    , "", List.of("USER"));
         final var Patrick = userService.createUser("Patrick", "", List.of("USER"));
         final var ThatGuy = userService.createUser("ThatOneGuyThatHasAReallyLongName", "", List.of("USER"));
-    
+        
+        final var guild1 = new Guild(John, "Project");
+        final var guild2 = new Guild(Max, "Test Guild");
+        final var channel1 = new Channel("Chat"     , guild1);
+        final var channel2 = new Channel("Memes"    , guild1);
+        final var channel3 = new Channel("Sus"      , guild1);
+        final var channel4 = new Channel("Minecraft", guild2);
+        final var channel5 = new Channel("General"  , guild2);
+        final var channel6 = new Channel("Cat Pics" , guild2);
+        final var channel7 = new Channel("abcdefghijklmnopqrstuvwxyz", guild1);
+        
         final var group1 = new Group();
         final var group2 = new Group();
     
@@ -95,13 +95,11 @@ public class CommandLineApplication implements CommandLineRunner {
         userRepository.save(Alice);
         userRepository.save(Lukas);
         userRepository.save(Max);
-    
-        John.joinGuild(guild1);
+        
         Alice.joinGuild(guild1);
         Lukas.joinGuild(guild2);
         Charlot.joinGuild(guild2);
         Max.joinGuild(guild1);
-        Max.joinGuild(guild2);
         ThatGuy.joinGuild(guild1);
         ThatGuy.joinGuild(guild2);
     

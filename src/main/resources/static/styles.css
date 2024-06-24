@@ -5,7 +5,18 @@
 }
 
 #serverSidebar {
-  max-width: 70px;
+  max-width: 4rem;
+  overflow-y: scroll;
+}
+
+#leftSidebar {
+  padding-left: 0.5rem;
+  overflow-y: scroll;
+}
+
+#middleCol {
+  padding: 1rem;
+  overflow-y: scroll;
 }
 
 #serverSidebar::-webkit-scrollbar {
@@ -14,9 +25,9 @@
 
 #userInfo {
   position: absolute;
-  left: 70px;
+  left: 4rem;
   bottom: 0;
-  width: 205px;
+  /* width: 205px; */
   height: 50px;
   padding-left: 8px;
 }
@@ -40,12 +51,28 @@
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 10px !important;
+  padding: 0px;
+  background-color: var(--bs-body-bg);
+}
+
+.list-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .guild-icon-box {
   display: flex;
   width: 50px;
   height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.SSB-button {
+  color: #00a043;
+  width: 1.625rem;
+  height: 1.625rem;
 }
 
 #messageDiv {
@@ -103,5 +130,121 @@
 .item {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-height: 1.9em;
+  text-wrap: nowrap;
+}
+
+.hidden {
+  visibility: hidden;
+  display: block;
+  height: 0px;
+}
+
+#contextMenu {
+  background-color: #000;
+  position: absolute;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.setting {
+  margin-bottom: 0.25rem;
+  height: 1.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.editForm {
+  display: flex;
+}
+
+#serverName {
+  display: flex;
+  justify-content: space-around;
+}
+
+#serverName:hover #serverSettings {
+  opacity: 1;
+}
+
+#serverSettings {
+  margin-top: 0.75rem;
+  height: fit-content;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#serverSettings svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+#serverSettings:hover svg path {
+  color: rgb(88, 101, 242);
+}
+
+#serverSettingsMenu {
+  background-color: #000;
+  position: absolute;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+#form-wraper {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.layer {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.layer-form {
+  border-radius: 1rem;
+}
+
+.LF-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  gap: 5rem;
+}
+
+.LF-body {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.LF-footer {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.opacity-control {
+  opacity: 0.5;
+}
+
+.opacity-control:hover {
+  opacity: 1;
 }

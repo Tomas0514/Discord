@@ -15,21 +15,10 @@
 
   <div th:replace="~{user :: FriendBar}"></div>
 
-  <div class="col-9 p-3 overflow-y-scroll">
+  <div class="col-9" id="middleCol">
     <div id="messages">
       <ul class="ps-0">
-        <li class="message mb-3 gap-2" th:each="message: ${group.getMessages()}">
-          <i th:text="${message.getAuthor().getUsername()[0]}" th:styleappend="|background: ${message.getAuthor().getAvatarColor()};|"></i>
-            <div>
-              <div class="message-header gap-2">
-                <div class="message-header-author fw-bold" th:text="${message.getAuthor().getUsername()}"></div>
-                <div class="message-header-timestamp" th:text="${message.getTimestamp()}"></div>
-              </div>
-              <div class="message-content" >
-                <span class="text-break" th:text="${message.getContent()}"></span>
-              </div>
-            </div>
-        </li>
+      
       </ul>
       <div id="messageDiv">
         <form id="messageForm">
@@ -42,7 +31,7 @@
   </div>
 
   <div class="bg-dark-subtle ps-2 col overflow-y-scroll">
-    <span th:text="|Members - ${group.getFriends().size()}|"></span>
+    <span th:text="|Friends - ${group.getFriends().size()}|"></span>
     <ul class="list-unstyled">
       <li class="fs-4 ms-3" th:each="member: ${group.getFriends()}" th:text="${member.getUser().getUsername()}"></li>
     </ul>
@@ -56,5 +45,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script th:src="@{/friend.js}"></script>
+<script th:src="@{/guildCreator.js}"></script>
 </body>
 </html>

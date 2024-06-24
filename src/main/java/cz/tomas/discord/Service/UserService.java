@@ -2,6 +2,8 @@ package cz.tomas.discord.Service;
 
 import cz.tomas.discord.Entity.User;
 import cz.tomas.discord.Repository.UserRepository;
+import cz.tomas.discord.Service.Exceptions.UserAlreadyExistsException;
+import cz.tomas.discord.Service.Exceptions.UserNotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;

@@ -2,6 +2,7 @@ package cz.tomas.discord.Service;
 
 import cz.tomas.discord.Entity.Group;
 import cz.tomas.discord.Repository.GroupRepository;
+import cz.tomas.discord.Service.Exceptions.GroupNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

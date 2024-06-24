@@ -22,7 +22,9 @@
             right: 50px;
         }
         #welcome {
-            top: 8%;
+            position: absolute;
+            left: 50%;
+            top: 0rem;
             display: flex;
             flex-direction: column;
         }
@@ -30,10 +32,11 @@
 </head>
 <body>
 
-<div class="position-absolute start-50 translate-middle" id="welcome">
+<div id="welcome">
     <a class="fs-2" th:href="@{/welcome}">Sign up</a>
     <a class="fs-2" th:href="@{/login}">Log in</a>
     <a class="fs-1" th:href="@{/guild/@me}">Me</a>
+    <a class="fs-3" th:href="@{/h2-console}">H2</a>
 </div>
 
 

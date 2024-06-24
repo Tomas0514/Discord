@@ -1,4 +1,4 @@
-package cz.tomas.discord.Service;
+package cz.tomas.discord.Service.Exceptions;
 
 public class GroupNotFoundException extends RuntimeException {
     

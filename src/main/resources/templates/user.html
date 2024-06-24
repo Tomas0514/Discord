@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark" th:data-user="${user.getUsername()}">
 <head>
   <meta charset="UTF-8">
   <title>Discord - Me</title>
@@ -13,7 +13,7 @@
 <div id="wrapper">
   <div th:replace="~{guild :: ServerSidebar}"></div>
 
-  <div class="bg-dark-subtle ps-2 col overflow-y-scroll" id="leftSidebar" th:fragment="FriendBar">
+  <div class="bg-dark-subtle col" id="leftSidebar" th:fragment="FriendBar">
     <ul class="list-unstyled">
       <li>
         <a class="fs-5 m-0" th:href="@{/guild/@me}">Friends</a>
@@ -44,5 +44,9 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script th:src="@{/guildCreator.js}"></script>
 </body>
 </html>

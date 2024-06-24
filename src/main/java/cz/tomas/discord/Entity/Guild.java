@@ -16,6 +16,9 @@ public class Guild {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    
+    @ManyToOne
+    private User owner;
 
     @Column(nullable = false, length = 32)
     private String name;
@@ -34,8 +37,11 @@ public class Guild {
      * Creates a guild.
      * @param name The name of the guild
      */
-    public Guild(String name) {
+    public Guild(User owner, String name) {
+        this.owner = owner;
         this.name = name;
+        new Channel("General", this);
+        new Member(owner, this);
     }
 
 
@@ -55,6 +61,10 @@ public class Guild {
      */
     public String getName() {
         return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
     }
     
     /**
@@ -87,5 +97,9 @@ public class Guild {
      */
     public void addMember(Member member) {
         members.add(member);
+    }
+    
+    public User getOwner() {
+        return owner;
     }
 }

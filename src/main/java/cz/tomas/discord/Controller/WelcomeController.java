@@ -1,6 +1,6 @@
 package cz.tomas.discord.Controller;
 
-import cz.tomas.discord.Service.UserAlreadyExistsException;
+import cz.tomas.discord.Service.Exceptions.UserAlreadyExistsException;
 import cz.tomas.discord.Service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

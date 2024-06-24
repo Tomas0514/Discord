@@ -3,6 +3,7 @@ package cz.tomas.discord.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Represents a message.
@@ -25,8 +26,8 @@ public class Message {
     private User author;
 
     @Column
-    private LocalDateTime timestamp;
-
+    private long timestamp;
+    
 
     // --- Constructors ---
     private Message() {}
@@ -42,7 +43,7 @@ public class Message {
         this.channel = channel;
         this.content = content;
         this.author = author;
-        timestamp = LocalDateTime.now();
+        timestamp = new Date().getTime();
         channel.addMessage(this);
     }
 
@@ -73,6 +74,10 @@ public class Message {
         return content;
     }
     
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
     /**
      * Get author.
      * @return {@link User}
@@ -83,9 +88,9 @@ public class Message {
     
     /**
      * Get timestamp.
-     * @return LocalDateTime
+     * @return The number of milliseconds since January 1, 1970, 00:00:00 GMT
      */
-    public LocalDateTime getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 }

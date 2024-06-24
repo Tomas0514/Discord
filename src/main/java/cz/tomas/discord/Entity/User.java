@@ -19,7 +19,10 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 32)
     private String username;
-
+    
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Guild> ownedGuilds = new ArrayList<>();
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
     
@@ -154,14 +157,4 @@ public class User {
         new Friend(this, group);
     }
     
-    public String getAvatarColor() {
-        String[] colors = {"#2196F3", "#32c787", "#00BCD4", "#ff5652", "#ffc107", "#ff85af", "#FF9800", "#39bbb0"};
-        
-        int hash = 0;
-        for (int i = 0; i < username.length(); i++) {
-            hash = 31 * hash + username.charAt(i);
-        }
-        int index = Math.abs(hash % colors.length);
-        return colors[index];
-    }
 }

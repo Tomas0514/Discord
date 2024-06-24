@@ -16,7 +16,7 @@ public class Channel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 32)
     private String name;
 
     @ManyToOne

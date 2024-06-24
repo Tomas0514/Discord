@@ -27,11 +27,11 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/", "/welcome", "/error", "/admin/**", "/h2-console/**").permitAll()
+                        auth.requestMatchers("/", "/welcome", "/error", "/h2-console/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
-                .formLogin(login -> login.loginPage("/login").permitAll())
+                .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/guild/@me").permitAll())
                 .build();
     }
     

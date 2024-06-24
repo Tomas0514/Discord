@@ -5,19 +5,26 @@ import java.time.LocalDateTime;
 
 public class ChatMessage {
     
+    private long id;
+    
     private String content;
     
     private String author;
     
     private long channelId;
     
-    private long guildId;
-    
     private long groupId;
     
     private ChatMessageType type;
     
-    private LocalDateTime timestamp;
+    private ActionType actionType;
+    
+    private long timestamp;
+    
+    /**
+     * In milliseconds
+      */
+    private int timezoneOffset;
     
     
     public String getContent() {
@@ -36,11 +43,11 @@ public class ChatMessage {
         this.author = author;
     }
     
-    public LocalDateTime getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
     
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
     
@@ -50,14 +57,6 @@ public class ChatMessage {
     
     public void setChannelId(long channelId) {
         this.channelId = channelId;
-    }
-    
-    public long getGuildId() {
-        return guildId;
-    }
-    
-    public void setGuildId(long guildId) {
-        this.guildId = guildId;
     }
     
     public long getGroupId() {
@@ -74,5 +73,29 @@ public class ChatMessage {
     
     public void setType(ChatMessageType type) {
         this.type = type;
+    }
+    
+    public int getTimezoneOffset() {
+        return timezoneOffset;
+    }
+    
+    public void setTimezoneOffset(int timezoneOffset) {
+        this.timezoneOffset = timezoneOffset;
+    }
+    
+    public long getId() {
+        return id;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    public ActionType getActionType() {
+        return actionType;
+    }
+    
+    public void setActionType(ActionType actionType) {
+        this.actionType = actionType;
     }
 }

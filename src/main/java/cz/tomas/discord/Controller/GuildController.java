@@ -5,6 +5,10 @@ import cz.tomas.discord.Repository.GroupRepository;
 import cz.tomas.discord.Repository.GuildRepository;
 import cz.tomas.discord.Repository.UserRepository;
 import cz.tomas.discord.Service.*;
+import cz.tomas.discord.Service.Exceptions.ChannelNotFoundException;
+import cz.tomas.discord.Service.Exceptions.GroupNotFoundException;
+import cz.tomas.discord.Service.Exceptions.GuildNotFoundException;
+import cz.tomas.discord.Service.Exceptions.UserNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,14 +27,16 @@ public class GuildController {
     protected final UserService userService;
     protected final GuildService guildService;
     protected final GroupService groupService;
+    protected final ChannelService channelService;
 
-    public GuildController(UserRepository userRepository, GuildRepository guildRepository, GroupRepository groupRepository, UserService userService, GuildService guildService, GroupService groupService) {
+    public GuildController(UserRepository userRepository, GuildRepository guildRepository, GroupRepository groupRepository, UserService userService, GuildService guildService, GroupService groupService, ChannelService channelService) {
         this.userRepository = userRepository;
         this.guildRepository = guildRepository;
         this.groupRepository = groupRepository;
         this.userService = userService;
         this.guildService = guildService;
         this.groupService = groupService;
+        this.channelService = channelService;
     }
     
     @GetMapping
@@ -161,13 +167,23 @@ public class GuildController {
     public String channel(@PathVariable long guildId, @PathVariable long channelId, Model model) {
         final User user = userService.getClientUser();
         final Guild guild = guildService.getGuild(guildId);
-        final Channel channel = guildService.getChannel(guild, channelId);
+        final Channel channel = channelService.getChannel(channelId);
         
         model.addAttribute("guilds", user.getGuilds());
         model.addAttribute("guild", guild);
         model.addAttribute("user", user);
         model.addAttribute("channel", channel);
         return "guild";
+    }
+    
+    @GetMapping("/@explore")
+    public String explore(Model model) {
+        final User user = userService.getClientUser();
+        final List<Guild> guilds = user.getGuilds();
+        
+        model.addAttribute("guilds", guilds);
+        model.addAttribute("user", user);
+        return "explore";
     }
     
     
